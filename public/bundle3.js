@@ -1,4 +1,3 @@
-//import LandRegistration from '../build/contracts/LandRegistration.json'
 var contractABI = [
     {
         "inputs": [],
@@ -337,13 +336,11 @@ var contractABI = [
         "type": "function"
     }
 ];
-var contractAddress = '0x9a7500e5A11b9D14Ef56798e61C5dd4d272d4Fc0';
+var contractAddress = '0x6BC7A76270DfA450b204AfbB48965B6D2e6d6189';
 let web3;
 let contract;
 let acc;
-//const web3 = new Web3('http://localhost:7545');
-//console.log(contractABI);
-//console.log(contractAddress);
+
 const initWeb3 = () => {
     console.log("inside initweb3");
     //console.log(window.ethereum);
@@ -378,61 +375,43 @@ const initContract = () => {
 
 const initApp = () => {
     //app();
+    const $search = document.getElementById('search');
+    const $request = document.getElementById('request');
+    const $buy = document.getElementById('buy');
     contract.methods.viewAssets().call({
         from: acc
     })
         .then(data => console.log(data))
-        .catch(e => console.log('assets catct', e));
-    const $regLand = document.getElementById('registerLand');
-    const $regAdmin = document.getElementById('registerAdmin');
+        .catch(e => console.log('assets catch', e));
+    contract.methods.landInfoUser(7224455400878).call()
+        .then(data => {
+            console.log(data);
+        })
+        .catch(e => console.log(e));
+
+    $request.addEventListener('click', (e) => {
+        e.preventDefault();
+        contract.methods.requstToLandOwner(7224455400878).send({ from: acc, gas: 3000000 })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(e => console.log(e));
+    })
+    $buy.addEventListener('click', (e) => {
+        e.preventDefault();
+        contract.methods.buyProperty(7224455400878).send({ from: acc, gas: 3000000, value: web3.utils.toWei('12', 'ether') })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(e => console.log(e));
+    })
     //console.log($regLand);
     //console.log("hey there", document.getElementById('registerLand'));
-    $regLand.addEventListener('submit', (e) => {
+    $search.addEventListener('click', (e) => {
         e.preventDefault();
         const formData = e.target.elements;
-        //console.log(e.target.elements[0].value);
-        // console.log(typeof formData[0].value,
-        //     typeof formData[1].value,
-        //     typeof formData[2].value,
-        //     typeof formData[3].value,
-        //     typeof formData[4].value,
-        //     typeof formData[5].value);
-        //error while registering to be checked!!!
-        contract.methods.Registration(
-            formData[0].value,
-            formData[1].value,
-            formData[2].value,
-            parseInt(formData[3].value),
-            formData[4].value,
-            parseInt(formData[5].value))
-            .send({ from: acc, gas: 3000000 })
-            .then(data => {
-                console.log(data)
-                alert('Land Registered Successfully');
-            })
-            .catch(e => console.log("register catch", e));
-    })
-
-    $regAdmin.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = e.target.elements;
-        //console.log(e.target.elements[0].value);
-        console.log(formData[0].value,
-            formData[1].value)
-        //error while registering to be checked!!!
-        contract.methods.addSuperAdmin(
-            formData[0].value,
-            formData[1].value)
-            .send({ from: acc, gas: 3000000 })
-            .then(data => {
-                console.log(data)
-                alert('Village Admin Registered Successfully');
-            })
-            .catch(e => console.log("register catch", e));
     })
 }
-
-//const contract = new web3.eth.Contract(contractABI, contractAddress);
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -452,25 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // initApp();
         })
         .catch(e => console.log(e));
-    // //console.log("document loaded");
-    // contract.methods.helloWorld().call()
-    //     .then(result => {
-    //         document.getElementById('title').innerHTML = result;
-    //         //console.log(result);
-    //     })
 })
 
-const app = function () {
-
-    // contract.methods.viewAssets().call({
-    //     from: acc
-    // })
-    //     .then(data => console.log(data, accounts));
-    contract.methods.helloWorld().call()
-        .then(data => console.log(data))
-        .catch(e => console.log("catch in HelloWorld", e));
-    contract.methods.setHelloWorld("new hello world 2").send({ from: String(acc) })
-        .then(data => console.log("new hello world function 2", data))
-        .catch(e => console.log("catch in setHelloWorld", e));
-};
 

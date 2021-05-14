@@ -10,7 +10,7 @@
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="web3.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
-    <script type="module" src="bundle.js"></script>
+    <script type="module" src="bundle3.js"></script>
 </head>
 
 <body class="d-flex flex-column vh-100">
@@ -32,21 +32,69 @@
         </div>
     </nav>
     <main class="container mt-5">
-        <h1 id="title">Your Assets</h1>
-        <hr>
-        <div id="assets" hidden>
+        <div class="row">
+            <h1 class="text-center">Search Land</h1>
+            <div class="col-6 offset-3">
+                <form action="#" method="GET" novalidate class="validate-form">
+                    <div class="mb-3">
+                        <label class="form-label" for="state">State</label>
+                        <input class="form-control" type="text" id="state" name="land[state]" required>
+                        <div class="valid-feedback">
+                            Great!!!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="district">District</label>
+                        <input class="form-control" type="text" id="district" name="Land[district]" required>
+                        <div class="valid-feedback">
+                            Great!!!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="village">Village</label>
+                        <input class="form-control" type="text" id="village" name="Land[village]" required>
+                        <div class="valid-feedback">
+                            Great!!!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="survey">Survey Number</label>
+                        <input class="form-control" type="text" id="survey" name="Land[survey]" required>
+                        <div class="valid-feedback">
+                            Great!!!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button id="search" class="btn btn-success">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="assets">
+            <hr>
             <span id="landId">Land id: 00000000</span>
             <h4>Property Details</h4>
             <p><b>State:</b> <span id='state'>NULL</span></p>
             <p><b>District:</b> <span id='district'>NULL</span></p>
             <p><b>Village:</b> <span id='village'>NULL</span></p>
             <p><b>Survey Number:</b> <span id='surveyNumber'>NULL</span></p>
-            <button id="makeAvailable" class="btn btn-info d-block mb-3">Make Available</button>
             <label class="label"></label>
-            <button id="accept" class="btn btn-success">Accept</button>
-            <button class="btn btn-danger" hidden>Reject</button>
+            <button id="request" class="btn btn-info">Request To Owner</button>
+            <button id="buy" class="btn btn-success">Buy Property</button>
+            <hr>
         </div>
-        <hr>
     </main>
     <footer class="footer bg-dark py-3 mt-auto">
         <div class="container">

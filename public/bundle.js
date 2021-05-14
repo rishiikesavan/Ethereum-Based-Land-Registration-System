@@ -336,12 +336,15 @@ var contractABI = [
         "type": "function"
     }
 ];
-var contractAddress = '0x9a7500e5A11b9D14Ef56798e61C5dd4d272d4Fc0';
+var contractAddress = '0x6BC7A76270DfA450b204AfbB48965B6D2e6d6189';
 let web3;
 let contract;
+let acc;
+let landDetails = {};
 //const web3 = new Web3('http://localhost:8545');
 //console.log(contractABI);
 //console.log(contractAddress);
+const $assets = document.getElementById('assets');
 const initWeb3 = () => {
     console.log("inside initweb3");
     //console.log(window.ethereum);
@@ -375,22 +378,56 @@ const initContract = () => {
 };
 
 const initApp = () => {
-    const $address = document.getElementById('address');
-    let acc;
-    web3.eth.getAccounts()
-        .then(_accounts => {
-            acc = _accounts[0];
-            console.log("first address", _accounts);
-            $address.innerHTML = acc;
+    contract.methods.viewAssets().call({
+        from: acc
+    })
+        .then(data => {
+            $assets.hidden = false;
+            console.log(data)
+            if (!data.length) {
+                $assets.innerHTML = "No Owned Assets";
+            }
+            else {
+                const landId = parseInt(data[0]);
+                landDetails[acc] = landId;
+                console.log(landDetails);
+                contract.methods.landInfoOwner(landId).call()
+                    .then(data => {
+                        console.log(data);
+                        document.getElementById('landId').textContent = "Land id : " + landId;
+                        document.getElementById('state').textContent = data[0];
+                        document.getElementById('district').textContent = data[1];
+                        document.getElementById('village').textContent = data[2];
+                        document.getElementById('surveyNumber').textContent = data[3];
+                    })
+                    .catch(e => console.log(e));
+            }
+
         })
+        .catch(e => console.log('assets catct', e));
+
     console.log(contract);
-    contract.methods.helloWorld().call()
-        .then(result => {
-            console.log("The result is : ", result);
-            document.getElementById('title').innerHTML = result;
-            //console.log(result);
-        })
-        .catch(e => console.log(e))
+    const $makeAvailable = document.getElementById('makeAvailable');
+    const $accept = document.getElementById('accept');
+    $makeAvailable.addEventListener('click', (e) => {
+        console.log("button clicked");
+        contract.methods.makeAvailable(landDetails[acc]).send({ from: acc, gas: 3000000 })
+            .then(data => {
+                console.log(data);
+                $makeAvailable.disabled = true;
+            })
+            .catch(e => console.log(e));
+    })
+    $accept.addEventListener('click', (e) => {
+        console.log("accept button clicked");
+        contract.methods.processRequest(landDetails[acc], 3).send({ from: acc, gas: 3000000 })
+            .then(data => {
+                console.log(data);
+                $makeAvailable.disabled = true;
+            })
+            .catch(e => console.log(e));
+    })
+
     // contract.methods.Registration(
     //     's',
     //     'd',
@@ -410,13 +447,20 @@ const initApp = () => {
 document.addEventListener('DOMContentLoaded', () => {
     console.log("doc loaded")
     //initApp();
+    const $address = document.getElementById('address');
     initWeb3()
         .then(_web3 => {
             web3 = _web3;
             contract = initContract();
-            initApp();
+            web3.eth.getAccounts()
+                .then(_accounts => {
+                    acc = _accounts[0];
+                    $address.innerHTML = acc;
+                    console.log("current address", acc);
+                    initApp();
+                })
+            // initApp();
         })
-        .catch(e => console.log(e));
     //console.log("document loaded");
     // contract.methods.helloWorld().call()
     //     .then(result => {
