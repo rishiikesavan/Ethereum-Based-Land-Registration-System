@@ -1,4 +1,3 @@
-//import LandRegistration from '../build/contracts/LandRegistration.json'
 var contractABI = [
     {
         "inputs": [],
@@ -8,47 +7,23 @@ var contractABI = [
     },
     {
         "constant": true,
-        "inputs": [],
-        "name": "demo",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "helloWorld",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
         "inputs": [
             {
-                "internalType": "string",
-                "name": "_demo",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
-        "name": "setHelloWorld",
-        "outputs": [],
+        "name": "allLand",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
         "payable": false,
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -335,9 +310,24 @@ var contractABI = [
         "payable": false,
         "stateMutability": "view",
         "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "allLands",
+        "outputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "",
+                "type": "uint256[]"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
     }
 ];
-var contractAddress = '0x9a7500e5A11b9D14Ef56798e61C5dd4d272d4Fc0';
+var contractAddress = '0x0Af206921e011b5Ec71c0Ed79bc7Fa131A34f41D';
 let web3;
 let contract;
 let acc;

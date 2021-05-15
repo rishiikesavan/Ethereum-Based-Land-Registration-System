@@ -3,13 +3,6 @@ pragma solidity >=0.4.0 <0.6.0;
 
 contract LandRegistration{
     
-    string public demo = "hello world!";
-    function helloWorld() public view returns(string memory) {
-        return demo;
-    }
-    function setHelloWorld(string memory _demo) public {
-        demo = _demo;
-    }
     //Land data structure
     struct landDetails{
         string state;
@@ -32,6 +25,8 @@ contract LandRegistration{
     mapping(string => address) superAdmin;
     mapping(address => uint[]) assetList;
     
+    uint[] public allLand;
+
     //setting the owner of the contract
     constructor() public{
         owner = msg.sender;
@@ -62,6 +57,7 @@ contract LandRegistration{
         land[id].CurrentOwner = _OwnerAddress;
         land[id].marketValue = _marketValue;
         assetList[_OwnerAddress].push(id);
+        allLand.push(id);
         return true;
     }
     
@@ -151,4 +147,7 @@ contract LandRegistration{
         return i;
     }
     
+    function allLands() view public returns(uint[] memory) {
+        return allLand;
+    }
 }

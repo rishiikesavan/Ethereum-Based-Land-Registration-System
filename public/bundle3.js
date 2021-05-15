@@ -7,47 +7,23 @@ var contractABI = [
     },
     {
         "constant": true,
-        "inputs": [],
-        "name": "demo",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "helloWorld",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
         "inputs": [
             {
-                "internalType": "string",
-                "name": "_demo",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
-        "name": "setHelloWorld",
-        "outputs": [],
+        "name": "allLand",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
         "payable": false,
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -334,9 +310,24 @@ var contractABI = [
         "payable": false,
         "stateMutability": "view",
         "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "allLands",
+        "outputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "",
+                "type": "uint256[]"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
     }
 ];
-var contractAddress = '0x6BC7A76270DfA450b204AfbB48965B6D2e6d6189';
+var contractAddress = '0x0Af206921e011b5Ec71c0Ed79bc7Fa131A34f41D';
 let web3;
 let contract;
 let acc;
@@ -375,23 +366,60 @@ const initContract = () => {
 
 const initApp = () => {
     //app();
+    let targetLand;
+    let targetValue;
+    const $assets = document.getElementById('assets');
+    const $searchLand = document.getElementById('searchLand');
     const $search = document.getElementById('search');
     const $request = document.getElementById('request');
     const $buy = document.getElementById('buy');
-    contract.methods.viewAssets().call({
-        from: acc
+
+    // contract.methods.viewAssets().call({
+    //     from: acc
+    // })
+    //     .then(data => console.log(data))
+    //     .catch(e => console.log('assets catch', e));
+    console.log($searchLand);
+    // contract.methods.allLands().call({ gas: 3000000 })
+    //     .then(data => {
+    //         console.log(data);
+    //     })
+    //     .catch(e => console.log("allLands catch"))
+    $searchLand.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = e.target.elements;
+        contract.methods.allLands().call({ gas: 3000000 })
+            .then(data => {
+                for (let land of data) {
+                    targetLand = land;
+                    contract.methods.landInfoUser(land).call()
+                        .then(data => {
+                            console.log(data);
+                            targetValue = parseInt(data[1]);
+                            targetValue += Math.ceil(targetValue / 10);
+                            targetValue = targetValue.toString();
+                            console.log(targetValue);
+                            if (data[2] == true || (data[2] == false && data[3] !== "0x0000000000000000000000000000000000000000")) {// change to true
+                                $assets.hidden = false;
+                                document.getElementById('landId').innerHTML = "Land id : " + land;
+                                document.getElementById('owner').innerHTML = data[0];
+                                document.getElementById('marketValue').innerHTML = data[1];
+                            }
+                            if (data[4] == 3) {
+                                $request.disabled = true;
+                                $buy.disabled = false;
+                            }
+
+                        })
+                        .catch(e => console.log(e));
+                }
+            })
+            .catch(e => console.log("allLands catch"))
     })
-        .then(data => console.log(data))
-        .catch(e => console.log('assets catch', e));
-    contract.methods.landInfoUser(7224455400878).call()
-        .then(data => {
-            console.log(data);
-        })
-        .catch(e => console.log(e));
 
     $request.addEventListener('click', (e) => {
         e.preventDefault();
-        contract.methods.requstToLandOwner(7224455400878).send({ from: acc, gas: 3000000 })
+        contract.methods.requstToLandOwner(targetLand).send({ from: acc, gas: 3000000 })
             .then(data => {
                 console.log(data);
             })
@@ -399,7 +427,7 @@ const initApp = () => {
     })
     $buy.addEventListener('click', (e) => {
         e.preventDefault();
-        contract.methods.buyProperty(7224455400878).send({ from: acc, gas: 3000000, value: web3.utils.toWei('12', 'ether') })
+        contract.methods.buyProperty(targetLand).send({ from: acc, gas: 3000000, value: web3.utils.toWei(targetValue, 'ether') })
             .then(data => {
                 console.log(data);
             })
@@ -407,10 +435,6 @@ const initApp = () => {
     })
     //console.log($regLand);
     //console.log("hey there", document.getElementById('registerLand'));
-    $search.addEventListener('click', (e) => {
-        e.preventDefault();
-        const formData = e.target.elements;
-    })
 }
 
 
@@ -434,3 +458,4 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
+//asdfsad

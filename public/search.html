@@ -35,7 +35,7 @@
         <div class="row">
             <h1 class="text-center">Search Land</h1>
             <div class="col-6 offset-3">
-                <form action="#" method="GET" novalidate class="validate-form">
+                <form id="searchLand" action="#" method="GET" novalidate class="validate-form">
                     <div class="mb-3">
                         <label class="form-label" for="state">State</label>
                         <input class="form-control" type="text" id="state" name="land[state]" required>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="survey">Survey Number</label>
-                        <input class="form-control" type="text" id="survey" name="Land[survey]" required>
+                        <input class="form-control" type="number" id="survey" name="Land[survey]" required>
                         <div class="valid-feedback">
                             Great!!!
                         </div>
@@ -82,17 +82,15 @@
                 </form>
             </div>
         </div>
-        <div id="assets">
+        <div id="assets" hidden>
             <hr>
             <span id="landId">Land id: 00000000</span>
             <h4>Property Details</h4>
-            <p><b>State:</b> <span id='state'>NULL</span></p>
-            <p><b>District:</b> <span id='district'>NULL</span></p>
-            <p><b>Village:</b> <span id='village'>NULL</span></p>
-            <p><b>Survey Number:</b> <span id='surveyNumber'>NULL</span></p>
+            <p><b>Owner:</b> <span id='owner'>NULL</span></p>
+            <p><b>Market Value:</b> <span id='marketValue'>NULL</span> Ethers</p>
             <label class="label"></label>
             <button id="request" class="btn btn-info">Request To Owner</button>
-            <button id="buy" class="btn btn-success">Buy Property</button>
+            <button id="buy" class="btn btn-success" disabled>Buy Property</button>
             <hr>
         </div>
     </main>

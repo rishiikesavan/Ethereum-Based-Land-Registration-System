@@ -7,47 +7,23 @@ var contractABI = [
     },
     {
         "constant": true,
-        "inputs": [],
-        "name": "demo",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "helloWorld",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
         "inputs": [
             {
-                "internalType": "string",
-                "name": "_demo",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
-        "name": "setHelloWorld",
-        "outputs": [],
+        "name": "allLand",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
         "payable": false,
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -334,9 +310,24 @@ var contractABI = [
         "payable": false,
         "stateMutability": "view",
         "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "allLands",
+        "outputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "",
+                "type": "uint256[]"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
     }
 ];
-var contractAddress = '0x6BC7A76270DfA450b204AfbB48965B6D2e6d6189';
+var contractAddress = '0x0Af206921e011b5Ec71c0Ed79bc7Fa131A34f41D';
 let web3;
 let contract;
 let acc;
@@ -378,6 +369,13 @@ const initContract = () => {
 };
 
 const initApp = () => {
+
+    const $makeAvailable = document.getElementById('makeAvailable');
+    const $accept = document.getElementById('accept');
+    const $reject = document.getElementById('reject');
+    const $requester = document.getElementById('requester');
+
+    let landId;
     contract.methods.viewAssets().call({
         from: acc
     })
@@ -388,9 +386,24 @@ const initApp = () => {
                 $assets.innerHTML = "No Owned Assets";
             }
             else {
-                const landId = parseInt(data[0]);
+                landId = parseInt(data[0]);
                 landDetails[acc] = landId;
                 console.log(landDetails);
+                if (landDetails[acc] !== undefined) {
+                    contract.methods.landInfoOwner(landDetails[acc]).call({ gas: 3000000 })
+                        .then(data => {
+                            console.log(data);
+                            if (data[4] == true)
+                                $makeAvailable.disabled = true;
+                            if (data[5] !== "0x0000000000000000000000000000000000000000") {
+                                $requester.innerHTML = "You have a request from : " + data[5];
+                                $makeAvailable.disabled = true;
+                                $accept.hidden = false;
+                                $reject.hidden = false;
+                            }
+                        })
+                        .catch(e => console.log("is available catch"));
+                }
                 contract.methods.landInfoOwner(landId).call()
                     .then(data => {
                         console.log(data);
@@ -404,11 +417,14 @@ const initApp = () => {
             }
 
         })
-        .catch(e => console.log('assets catct', e));
+        .catch(e => console.log('assets catch', e));
 
     console.log(contract);
-    const $makeAvailable = document.getElementById('makeAvailable');
-    const $accept = document.getElementById('accept');
+
+
+
+
+
     $makeAvailable.addEventListener('click', (e) => {
         console.log("button clicked");
         contract.methods.makeAvailable(landDetails[acc]).send({ from: acc, gas: 3000000 })
@@ -461,10 +477,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
             // initApp();
         })
-    //console.log("document loaded");
-    // contract.methods.helloWorld().call()
-    //     .then(result => {
-    //         document.getElementById('title').innerHTML = result;
-    //         //console.log(result);
-    //     })
 })
+
+//asdfas

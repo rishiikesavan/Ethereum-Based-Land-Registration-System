@@ -10,7 +10,7 @@
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="web3.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
-    <script type="module" src="bundle.js"></script>
+    <script type="module" src="./bundle.js"></script>
 </head>
 
 <body class="d-flex flex-column vh-100">
@@ -42,9 +42,9 @@
             <p><b>Village:</b> <span id='village'>NULL</span></p>
             <p><b>Survey Number:</b> <span id='surveyNumber'>NULL</span></p>
             <button id="makeAvailable" class="btn btn-info d-block mb-3">Make Available</button>
-            <label class="label"></label>
-            <button id="accept" class="btn btn-success">Accept</button>
-            <button class="btn btn-danger" hidden>Reject</button>
+            <label id="requester" class="label d-block mb-2"></label>
+            <button id="accept" class="btn btn-success" hidden>Accept</button>
+            <button id="reject" class="btn btn-danger" hidden>Reject</button>
         </div>
         <hr>
     </main>
