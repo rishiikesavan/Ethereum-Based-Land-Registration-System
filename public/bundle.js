@@ -1,333 +1,3 @@
-var contractABI = [
-    {
-        "inputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "allLand",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_superAdmin",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "_village",
-                "type": "string"
-            }
-        ],
-        "name": "addSuperAdmin",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "_state",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_district",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_village",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_surveyNumber",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address payable",
-                "name": "_OwnerAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_marketValue",
-                "type": "uint256"
-            }
-        ],
-        "name": "Registration",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            }
-        ],
-        "name": "landInfoOwner",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "enum LandRegistration.reqStatus",
-                "name": "",
-                "type": "uint8"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            }
-        ],
-        "name": "landInfoUser",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "enum LandRegistration.reqStatus",
-                "name": "",
-                "type": "uint8"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "property",
-                "type": "uint256"
-            }
-        ],
-        "name": "makeAvailable",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            }
-        ],
-        "name": "requstToLandOwner",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "viewAssets",
-        "outputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "",
-                "type": "uint256[]"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "property",
-                "type": "uint256"
-            }
-        ],
-        "name": "viewRequest",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "property",
-                "type": "uint256"
-            },
-            {
-                "internalType": "enum LandRegistration.reqStatus",
-                "name": "status",
-                "type": "uint8"
-            }
-        ],
-        "name": "processRequest",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "property",
-                "type": "uint256"
-            }
-        ],
-        "name": "buyProperty",
-        "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            }
-        ],
-        "name": "findId",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "allLands",
-        "outputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "",
-                "type": "uint256[]"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    }
-];
-var contractAddress = '0x0Af206921e011b5Ec71c0Ed79bc7Fa131A34f41D';
 let web3;
 let contract;
 let acc;
@@ -431,6 +101,7 @@ const initApp = () => {
             .then(data => {
                 console.log(data);
                 $makeAvailable.disabled = true;
+                alert("Property made available to sale");
             })
             .catch(e => console.log(e));
     })
@@ -440,21 +111,20 @@ const initApp = () => {
             .then(data => {
                 console.log(data);
                 $makeAvailable.disabled = true;
+                alert("Request Accepted");
             })
             .catch(e => console.log(e));
-    })
-
-    // contract.methods.Registration(
-    //     's',
-    //     'd',
-    //     'v',
-    //     1,
-    //     '0x42Cda27D624Cdb06A8F3ED855De20fF80dEc0Eae',
-    //     10
-    // )
-    //     .send({ from: '0x9bD9Fed61b3E9cBA672262E9dBb4Fad765a48397', gas: 3000000 })
-    //     .then(data => console.log(data))
-    //     .catch(e => console.log("register catch", e));
+    });
+    $reject.addEventListener('click', (e) => {
+        console.log("reject button clicked");
+        contract.methods.processRequest(landDetails[acc], 2).send({ from: acc, gas: 3000000 })
+            .then(data => {
+                console.log(data);
+                $makeAvailable.disabled = true;
+                alert("Request Rejected");
+            })
+            .catch(e => console.log(e));
+    });
 }
 
 //const contract = new web3.eth.Contract(contractABI, contractAddress);
@@ -479,4 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 })
 
+setInterval(() => {
+    web3.eth.getAccounts()
+        .then(_accounts => {
+            acc = _accounts[0];
+            //console.log(acc);
+        })
+        .catch();
+}, 100);
 //asdfas

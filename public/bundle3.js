@@ -1,337 +1,7 @@
-var contractABI = [
-    {
-        "inputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "allLand",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_superAdmin",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "_village",
-                "type": "string"
-            }
-        ],
-        "name": "addSuperAdmin",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "_state",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_district",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_village",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_surveyNumber",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address payable",
-                "name": "_OwnerAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_marketValue",
-                "type": "uint256"
-            }
-        ],
-        "name": "Registration",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            }
-        ],
-        "name": "landInfoOwner",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "enum LandRegistration.reqStatus",
-                "name": "",
-                "type": "uint8"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            }
-        ],
-        "name": "landInfoUser",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            },
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "enum LandRegistration.reqStatus",
-                "name": "",
-                "type": "uint8"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "property",
-                "type": "uint256"
-            }
-        ],
-        "name": "makeAvailable",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            }
-        ],
-        "name": "requstToLandOwner",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "viewAssets",
-        "outputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "",
-                "type": "uint256[]"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "property",
-                "type": "uint256"
-            }
-        ],
-        "name": "viewRequest",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "property",
-                "type": "uint256"
-            },
-            {
-                "internalType": "enum LandRegistration.reqStatus",
-                "name": "status",
-                "type": "uint8"
-            }
-        ],
-        "name": "processRequest",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "property",
-                "type": "uint256"
-            }
-        ],
-        "name": "buyProperty",
-        "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            }
-        ],
-        "name": "findId",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "allLands",
-        "outputs": [
-            {
-                "internalType": "uint256[]",
-                "name": "",
-                "type": "uint256[]"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    }
-];
-var contractAddress = '0x0Af206921e011b5Ec71c0Ed79bc7Fa131A34f41D';
 let web3;
 let contract;
 let acc;
-
+const $address = document.getElementById('address');
 const initWeb3 = () => {
     console.log("inside initweb3");
     //console.log(window.ethereum);
@@ -409,10 +79,13 @@ const initApp = () => {
                                 $request.disabled = true;
                                 $buy.disabled = false;
                             }
-
+                            if ($assets.hidden) {
+                                alert("No availabe Land");
+                            }
                         })
                         .catch(e => console.log(e));
                 }
+
             })
             .catch(e => console.log("allLands catch"))
     })
@@ -422,6 +95,7 @@ const initApp = () => {
         contract.methods.requstToLandOwner(targetLand).send({ from: acc, gas: 3000000 })
             .then(data => {
                 console.log(data);
+                alert("Request sent Successfully");
             })
             .catch(e => console.log(e));
     })
@@ -430,6 +104,7 @@ const initApp = () => {
         contract.methods.buyProperty(targetLand).send({ from: acc, gas: 3000000, value: web3.utils.toWei(targetValue, 'ether') })
             .then(data => {
                 console.log(data);
+                alert("Property Bought Successfully");
             })
             .catch(e => console.log(e));
     })
@@ -440,7 +115,6 @@ const initApp = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("doc loaded")
-    const $address = document.getElementById('address');
     initWeb3()
         .then(_web3 => {
             web3 = _web3;
@@ -459,3 +133,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //asdfsad
+setInterval(() => {
+    web3.eth.getAccounts()
+        .then(_accounts => {
+            acc = _accounts[0];
+            //console.log(acc);
+            //$address.innerHTML = acc;
+        })
+        .catch();
+}, 100);
