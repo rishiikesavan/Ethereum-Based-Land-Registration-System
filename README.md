@@ -10,7 +10,8 @@
 7. Open a new terminal and run the following commands:
    ~ truffle compile
    ~ truffle migrate
-8. Import local ganache-cli accounts to METAMASK using the private keys in the ganache-cli terminal.
-9. In the terminal run
+8. Copy the contract address from ganache-cli terminal and ABI from build/contracts/LandRegistraction.json and paste it in data.js file.
+9. Import local ganache-cli accounts to METAMASK using the private keys in the ganache-cli terminal.
+10. In the terminal run
    ~ static-server ./public
-10. Now open http://localhost:9080/ in the browser.
+11. Now open http://localhost:9080/ in the browser.
