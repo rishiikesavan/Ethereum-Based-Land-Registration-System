@@ -327,4 +327,11 @@ var contractABI = [
         "type": "function"
     }
 ];
-var contractAddress = '0x8167b338777d01422F53858611eA7e903443D432';
+var contractAddress = '0xAaE4570eD6991686755DD0F94ddB0105E7345ea3';
+//to check if this line is relfected in browser source files
+//check line Part 2
+//check line Part 3
+//check line Part 4
+//check line Part 5
+//check line Part 6
+//new comment

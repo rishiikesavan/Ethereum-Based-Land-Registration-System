@@ -50,6 +50,7 @@ const initApp = () => {
     $regLand.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = e.target.elements;
+        console.log(formData);
         //console.log(e.target.elements[0].value);
         // console.log(typeof formData[0].value,
         //     typeof formData[1].value,

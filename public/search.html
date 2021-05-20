@@ -44,6 +44,38 @@
                 <form id="searchLand" action="#" method="GET" novalidate class="validate-form">
                     <div class="mb-3">
                         <label class="form-label" for="state">State</label>
+                        <select class="form-select" aria-label="Default select example" id="state" name="land[state]"
+                            required>
+                            <option selected>Open this select menu</option>
+                            <option value="tamil nadu">tamil nadu</option>
+                            <option value="maharashtra">maharashtra</option>
+                            <option value="karanataka">karanataka</option>
+                        </select>
+                        <div class="valid-feedback">
+                            Great!!!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="distric">District</label>
+                        <select class="form-select" aria-label="Default select example" id="district"
+                            name="Land[district]" required>
+                            <option selected>Open this select menu</option>
+                            <option value="chennai">chennai</option>
+                            <option value="trichy">trichy</option>
+                            <option value="madurai">madurai</option>
+                        </select>
+                        <div class="valid-feedback">
+                            Great!!!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter
+                        </div>
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label class="form-label" for="state">State</label>
                         <input class="form-control" type="text" id="state" name="land[state]" required>
                         <div class="valid-feedback">
                             Great!!!
@@ -61,7 +93,7 @@
                         <div class="invalid-feedback">
                             Please Enter
                         </div>
-                    </div>
+                    </div> -->
                     <div class="mb-3">
                         <label class="form-label" for="village">Village</label>
                         <input class="form-control" type="text" id="village" name="Land[village]" required>
